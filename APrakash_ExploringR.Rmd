@@ -1,0 +1,197 @@
+---
+title: "Learning R Example"
+author: "Aarthi Prakash"
+date: "09/24/2023"
+output: "html_document"
+---
+
+```{r}
+#Read DataFile into datatable named as employee_df
+employee_df = read.csv("/Users/aarthiprakash/Documents/Rutgers MBA 2022/Fall 2023/[0] Business Forecasting/Week 2/Assignment2/Typical_Employee_Survey_Data.csv")
+class(employee_df$Age)
+
+#-----------------------------------------------------------------------------------------------------
+#1. Add Header Row (10 points)
+names(employee_df)[1] <- "AGE"
+names(employee_df)[2] <- "GENDER"
+names(employee_df)[3] <- "SATISFACTION"
+names(employee_df)[4] <- "IMP_JOB_CHARACTERISTICS"
+names(employee_df)[5] <- "EMP_DURATION"
+names(employee_df)[6] <- "PROMOTION_LIKELIHOOD"
+names(employee_df)[7] <- "DECISIONS"
+names(employee_df)[8] <- "BUDGET_DECISIONS"
+names(employee_df)[9] <- "PROUDLY_WORKING"
+names(employee_df)[10] <- "JOB_CHANGE_LIKELIHOOD"
+names(employee_df)[11] <- "RELATIONSHIP_RATING"
+
+#-----------------------------------------------------------------------------------------------------
+#2. Print out the 5-point summary and boxplot (numerical columns) for each column (20 points)
+
+#5 number summary - Min, Q1, Median, Q3, Max - Remember gives rounded values
+#AGE
+fivenum(employee_df$AGE)
+boxplot(employee_df$AGE, main = "Summary of Employee Age")
+
+#GENDER
+fivenum(employee_df$GENDER)
+
+#SATISFACTION
+fivenum(employee_df$SATISFACTION)
+
+#IMP_JOB_CHARACTERISTICS
+fivenum(employee_df$IMP_JOB_CHARACTERISTICS)
+
+#EMP_DURATION
+fivenum(employee_df$EMP_DURATION)
+boxplot(employee_df$EMP_DURATION, main = "Summary of Employee Duration at Company")
+
+#PROMOTION_LIKELIHOOD
+fivenum(employee_df$PROMOTION_LIKELIHOOD)
+
+#DECISIONS
+fivenum(employee_df$DECISIONS)
+
+#BUDGET_DECISIONS
+fivenum(employee_df$BUDGET_DECISIONS)
+
+#PROUDLY_WORKING
+fivenum(employee_df$PROUDLY_WORKING)
+
+#JOB_CHANGE_LIKELIHOOD
+fivenum(employee_df$JOB_CHANGE_LIKELIHOOD)
+
+#RELATIONSHIP_RATING
+fivenum(employee_df$RELATIONSHIP_RATING)
+
+#-----------------------------------------------------------------------------------------------------
+#3. Convert the columns that need to be converted to Factors (10 points)-----------------------------
+#GENDER
+employee_df$GENDER <- as.factor(employee_df$GENDER)
+
+#SATISFACTION
+employee_df$SATISFACTION <- as.factor(employee_df$SATISFACTION)
+
+#IMP_JOB_CHARACTERISTICS
+employee_df$IMP_JOB_CHARACTERISTICS <- as.factor(employee_df$IMP_JOB_CHARACTERISTICS)
+
+#PROMOTION_LIKELIHOOD
+employee_df$PROMOTION_LIKELIHOOD <- as.factor(employee_df$PROMOTION_LIKELIHOOD)
+
+#DECISIONS
+employee_df$DECISIONS <- as.factor(employee_df$DECISIONS)
+
+#BUDGET_DECISIONS
+employee_df$BUDGET_DECISIONS <- as.factor(employee_df$BUDGET_DECISIONS)
+
+#PROUDLY_WORKING
+employee_df$PROUDLY_WORKING <- as.factor(employee_df$PROUDLY_WORKING)
+
+#JOB_CHANGE_LIKELIHOOD
+employee_df$JOB_CHANGE_LIKELIHOOD <- as.factor(employee_df$JOB_CHANGE_LIKELIHOOD)
+
+#RELATIONSHIP_RATING
+employee_df$RELATIONSHIP_RATING <- as.factor(employee_df$RELATIONSHIP_RATING)
+
+#-----------------------------------------------------------------------------------------------------
+#4. Plot the right visual for each column (20 points)---------------------------------------------------------------------------------------
+#AGE
+boxplot(employee_df$AGE)
+boxplot(employee_df$AGE, main = "Summary of Employee Age")
+
+#GENDER
+table(employee_df$GENDER)
+levels(employee_df$GENDER) <- c("Male","Female")
+barplot(table(employee_df$GENDER),xlab = "Gender", ylab = "Frequency",main="Employee Gender")
+
+#SATISFACTION
+table(employee_df$SATISFACTION)
+levels(employee_df$SATISFACTION) <- c("Very Satisfied","Moderately Satisfied","A Little Dissatisfied","Very Dissatisfied")
+barplot(table(employee_df$SATISFACTION),xlab = "Satisfaction", ylab = "Frequency",main="Employee Satisfaction")
+
+pie(table(employee_df$SATISFACTION), main="Employee Satisfaction")
+class(employee_df$SATISFACTION)
+
+#IMP_JOB_CHARACTERISTICS
+table(employee_df$IMP_JOB_CHARACTERISTICS)
+levels(employee_df$IMP_JOB_CHARACTERISTICS) <- c("High Income","No Danger of Being Fired","Flexible Hours","Opportunities for Advancement","Enjoying the Work")
+barplot(table(employee_df$IMP_JOB_CHARACTERISTICS),xlab = "Characteristics", ylab = "Frequency",main="Important Job Characteristics for Employees")
+
+pie(table(employee_df$IMP_JOB_CHARACTERISTICS), main="Important Job Characteristics for Employees")
+
+#EMP_DURATION
+boxplot(employee_df$EMP_DURATION)
+stem(employee_df$EMP_DURATION)
+hist(employee_df$EMP_DURATION, xlab = "Employee Duration", y_lab = "Frequency", main = "How Many Years Employee has Worked at Company?")
+
+#PROMOTION_LIKELIHOOD
+table(employee_df$PROMOTION_LIKELIHOOD)
+levels(employee_df$PROMOTION_LIKELIHOOD) <- c("Very Likely","Likely","Not Sure","Unlikely","Very Unlikely")
+barplot(table(employee_df$PROMOTION_LIKELIHOOD),xlab = "Likelihood of Promotion", ylab = "Frequency",main="Employee Opinion on Likelihood of Receiving a Promotion")
+
+pie(table(employee_df$PROMOTION_LIKELIHOOD), main="Employee Opinion on Likelihood of Receiving a Promotion")
+
+#DECISIONS
+table(employee_df$DECISIONS)
+levels(employee_df$DECISIONS) <- c("Always","Much of the Time","Sometimes","Never")
+barplot(table(employee_df$DECISIONS),xlab = "Decision-Making", ylab = "Frequency",main="How Likely are Employees Involved in Decision-Making?")
+
+pie(table(employee_df$DECISIONS), main="How Likely are Employees Involved in Decision-Making?")
+
+#BUDGET_DECISIONS
+table(employee_df$BUDGET_DECISIONS)
+levels(employee_df$BUDGET_DECISIONS) <- c("Yes","No")
+barplot(table(employee_df$BUDGET_DECISIONS),xlab = "Budget Decisions", ylab = "Frequency",main="How Likely are Employees Involved in Budgetary Decisions?")
+
+
+#PROUDLY_WORKING
+table(employee_df$PROUDLY_WORKING)
+levels(employee_df$PROUDLY_WORKING) <- c("Very Proud","Somewhat Proud","Indifferent","Not at all Proud")
+barplot(table(employee_df$PROUDLY_WORKING),xlab = "Proud Level", ylab = "Frequency",main="How Proud are Employees Working at Company?")
+
+pie(table(employee_df$PROUDLY_WORKING), main="How Proud are Employees Working at Company?")
+
+#JOB_CHANGE_LIKELIHOOD
+table(employee_df$JOB_CHANGE_LIKELIHOOD)
+levels(employee_df$JOB_CHANGE_LIKELIHOOD) <- c("Very Likely","Likely","Not Sure","Unlikely","Very Unlikely")
+barplot(table(employee_df$JOB_CHANGE_LIKELIHOOD),xlab = "Proud Level", ylab = "Frequency",main="How Likely are Employees going to Change their Job?")
+
+pie(table(employee_df$JOB_CHANGE_LIKELIHOOD), main="How Likely are Employees going to Change their Job?")
+
+#RELATIONSHIP_RATING
+table(employee_df$RELATIONSHIP_RATING)
+levels(employee_df$RELATIONSHIP_RATING) <- c("Very Good","Good","So So","Bad","Very Bad")
+barplot(table(employee_df$RELATIONSHIP_RATING),xlab = "Relationship Level", ylab = "Frequency",main="How are the Relationships with Coworkers and Colleagues?")
+
+pie(table(employee_df$RELATIONSHIP_RATING), main="How are the Relationships with Coworkers and Colleagues?")
+
+
+#-----------------------------------------------------------------------------------------------------
+#5. Plot scatter plots to show few relationships (20 points)
+  
+#table(employee_df$AGE)
+#class(employee_df$EMP_DURATION)
+#plot(employee_df$EMP_DURATION)
+#plot(employee_df$EMP_DURATION,employee_df$AGE)
+
+plot(employee_df$AGE,employee_df$EMP_DURATION, xlab = "Employee Age", ylab = "Duration", main = "Employee Age vs. Employment Duration at Company")
+plot(employee_df$AGE,employee_df$IMP_JOB_CHARACTERISTICS,xlab = "Employee Age", ylab = "Characteristics", main = "Employee Age vs. Most Important Job Characteristics")
+plot(employee_df$AGE,employee_df$SATISFACTION,xlab = "Employee Age", ylab = "Satisfaction", main = "Employee Age vs. Employment Satisfaction Rating")
+plot(employee_df$EMP_DURATION,employee_df$SATISFACTION,xlab = "Duration", ylab = "Satisfaction", main = "Employment Duration at Company vs. Employment Satisfaction Rating")
+plot(employee_df$EMP_DURATION,employee_df$IMP_JOB_CHARACTERISTICS,xlab = "Duration", ylab = "Characteristics", main = "Employment Duration at Company vs. Most Important Job Characteristics")
+
+#-----------------------------------------------------------------------------------------------------
+#6. Submit the homework (rmd and HTML file) in GitHub (10 points)
+
+#-----------------------------------------------------------------------------------------------------
+#AGE
+#GENDER
+#SATISFACTION
+#IMP_JOB_CHARACTERISTICS
+#EMP_DURATION
+#PROMOTION_LIKELIHOOD
+#DECISIONS
+#BUDGET_DECISIONS
+#PROUDLY_WORKING
+#JOB_CHANGE_LIKELIHOOD
+#RELATIONSHIP_RATING
+```
